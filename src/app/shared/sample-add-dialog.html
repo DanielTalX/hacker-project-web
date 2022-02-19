@@ -1,0 +1,34 @@
+<h2 *ngIf="!!data.title" mat-dialog-title>{{ data.title }}</h2>
+<div mat-dialog-content>
+  <p *ngIf="!!data.content">{{ data.content }}</p>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Claim Name</mat-label>
+    <input type="text" matInput [(ngModel)]="data.value">
+  </mat-form-field>
+
+  <!-- <form #SampleForm="ngForm">
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="claimName">Claim Name</label>
+        <input matInput id="claimName" name="claimName" #claimName="ngModel" required class="form-control"
+          [(ngModel)]="data.claimName" />
+        <div [hidden]="claimName.valid || claimName.pristine" class="alert alert-danger">
+          Claim Name Name is required
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div class="panel-footer" mat-dialog-actions>
+      <!3-- (click)="saveData()" -->
+      <!-- <button class="btn btn-primary" mat-dialog-close="value" [disabled]="!SampleForm.form.valid">Save</button>
+      <button class="btn btn-default" (click)="cancel()">No, Cancel</button>
+    </div>
+  </form> -->
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">No, Cancel</button>
+  <button mat-button color="primary" [mat-dialog-close]="data.value" cdkFocusInitial>Yes, Add</button>
+</div>

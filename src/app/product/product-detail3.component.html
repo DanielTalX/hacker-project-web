@@ -1,0 +1,66 @@
+<mat-card>
+  <mat-card-content>
+    <div class="container">
+      <div>
+        <h1>Product Information</h1>
+        <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+
+          <div class="form-group">
+            <label for="productName">Product Name</label>
+            <input type="text" class="form-control" id="productName" required [(ngModel)]="product.productName"
+              name="productName" #productName="ngModel">
+            <div [hidden]="productName.valid || productName.pristine" class="alert alert-danger">
+              Product Name is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="introductionDate">Introduction Date</label>
+            <input type="date" class="form-control" id="introductionDate"
+              [(ngModel)]="product.introductionDate | date:'yyyy-MM-dd'" name="introductionDate"
+              (ngModelChange)="product.introductionDate = $event">
+          </div>
+
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" id="price" required [(ngModel)]="product.price" name="price"
+              #price="ngModel">
+            <div [hidden]="price.valid || price.pristine" class="alert alert-danger">
+              Price is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="url">URL</label>
+            <input type="url" class="form-control" id="url" required [(ngModel)]="product.url" name="url"
+              #url="ngModel">
+            <div [hidden]="url.valid || url.pristine" class="alert alert-danger">
+              URL is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="categories">Category</label>
+            <select class="form-control" id="categories" required [(ngModel)]="product.categoryId" name="categories"
+              #categories="ngModel">
+              <option *ngFor="let category of categories" value="{{category.categoryId}}">
+                {{category.categoryName}}</option>
+            </select>
+            <div [hidden]="categories.valid || categories.pristine" class="alert alert-danger">
+              Category is required
+            </div>
+          </div>
+
+          <!-- <div class="panel-footer"> -->
+            <!-- *ngIf="securityObject.canSaveProduct" -->
+            <button class="btn btn-primary" (click)="saveData()" [disabled]="!productForm.form.valid"
+              *hasClaim="['EditProduct', 'AddProduct']">Save</button>
+            <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+            <!-- <button type="button" class="btn btn-default" (click)="newHero(); productForm.reset()">New Hero</button> -->
+          <!-- </div> -->
+
+        </form>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

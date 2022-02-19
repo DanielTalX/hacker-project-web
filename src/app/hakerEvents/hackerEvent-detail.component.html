@@ -1,0 +1,74 @@
+<mat-card>
+  <mat-card-content>
+    <form #hackerEventForm="ngForm">
+      <div class="panel panel-primary" *ngIf="hackerEvent">
+        <div class="panel-heading">
+          <h1 class="panel-title">HackerEvent Information</h1>
+          <mat-spinner *ngIf="showSpinner" diameter="30"></mat-spinner>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label for="title">title</label>
+            <input id="title" name="title" #title="ngModel" required class="form-control"
+              [(ngModel)]="hackerEvent.title" />
+            <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+              title is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="title">subtitle</label>
+            <input id="subtitle" name="subtitle" maxlength="100" #subtitle="ngModel" required class="form-control"
+              [(ngModel)]="hackerEvent.subtitle" />
+            <div [hidden]="subtitle.valid || subtitle.pristine" class="alert alert-danger">
+              subtitle is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">description</label>
+            <input id="description" name="description" maxlength="3000" #description="ngModel" required class="form-control"
+              [(ngModel)]="hackerEvent.description" />
+            <div [hidden]="description.valid || description.pristine" class="alert alert-danger">
+              description is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="start">start Date</label>
+            <input id="start" name="start" required class="form-control"
+              [ngModel]="hackerEvent.start | date:'yyyy-MM-dd'" (ngModelChange)="hackerEvent.start = $event"
+              type="date" />
+          </div>
+
+          <div class="form-group">
+            <label for="breachType">breachType</label>
+            <input id="breachType" name="breachType" maxlength="50" required #breachType="ngModel" class="form-control"
+              [(ngModel)]="hackerEvent.breachType" />
+            <div [hidden]="breachType.valid || breachType.pristine" class="alert alert-danger">
+              breachType is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="url">URL</label>
+            <input id="url" name="url" maxlength="255" #url="ngModel" required class="form-control" [(ngModel)]="hackerEvent.url" />
+            <div [hidden]="url.valid || url.pristine" class="alert alert-danger">
+              url is required
+            </div>
+          </div>
+
+        </div>
+        <div class="panel-footer text-center">
+          <!-- *ngIf="securityObject.canSaveProduct" -->
+          <!-- *hasClaim="['EditProduct', 'AddProduct']" -->
+          <!-- <button class="btn btn-primary" (click)="saveData()" [disabled]="!hackerEventForm.form.valid || showSpinner">Save</button> -->
+          <!-- <button class="btn btn-default" (click)="cancel()">Cancel</button> -->
+          <button mat-raised-button (click)="saveData()" [disabled]="!hackerEventForm.form.valid || showSpinner" color="primary">Save</button>
+          <button mat-raised-button class="margin-left5" (click)="cancel()" [disabled]="showSpinner" color="warn">Cancel</button>
+
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

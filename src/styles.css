@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* You can add global styles to this file, and also import other style files */
+.body-content {
+  margin-top: 5em;
+}
+
+.section-header {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.margin-left5{
+  margin-left: 5px;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.grey-text{
+  color: #777;
+}
+
+.blue-snackbar {
+  background: #3f51b5;
+}
+
+.red-snackbar {
+  background: #f44336;
+}

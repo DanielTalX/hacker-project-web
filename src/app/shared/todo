@@ -1,0 +1,116 @@
+steps:
+1. set-up project
+    https://angular.io/tutorial/toh-pt0
+    ng new hacker-project
+    cd hacker-project
+    ng serve --open
+
+2. create todo
+
+* open terminal (Ctrl + `)...... ` left of 1 on keyboard
+
+3. install angular material:
+    https://material.angular.io/guide/getting-started
+    ng add @angular/material
+    Would you like to proceed? Yes
+    ? Choose a prebuilt theme name, or "custom" for a custom theme: Indigo/Pink        [ Preview: https://material.angular.io?theme=indigo-pink ]
+    ? Set up global Angular Material typography styles? Yes
+    ? Set up browser animations for Angular Material? Yes
+    ng serve --open
+
+    commit: init + install angular material
+
+4. install bootstrap
+    https://stackoverflow.com/questions/37649164/how-to-add-bootstrap-to-an-angular-cli-project
+    a. npm install ngx-bootstrap bootstrap --save
+    b. Open src/app/app.module.ts and add:
+    import { AlertModule } from 'ngx-bootstrap/alert';
+    ...
+    @NgModule({
+    ...
+    imports: [AlertModule.forRoot(), ... ],
+    ... 
+    })
+    c. Open angular-cli.json (for angular6 and later file name changed to angular.json )
+    and insert a new entry into the styles array:
+    "styles": [
+        "styles.css",
+        "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    ],
+    d. Open src/app/app.component.html and add:
+    <alert type="success">hello</alert>
+    e. ng serve --open
+    f. commit: install bootstrap
+
+5. install jquery
+    https://stackoverflow.com/questions/30623825/how-to-use-jquery-with-angular
+    npm install jquery --save
+    ng serve --open
+    commit: install jquery
+
+6. before copy:
+    a. tsconfig.json: add "strictPropertyInitialization": false
+    b. angular.json: add to test styles: 
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    c. environment.ts: add BASE_URL: "http://localhost:3006/api/cs/"
+    d. ng serve --open
+    e. commit: before copy
+
+7. copy:
+    1. todo file
+    2. styles.css
+    in apps:
+    3. copy dashboard folder
+    4. copy security folder
+    5. copy shared folder
+    6. copy hackerEvents folder
+    7. copy password-strength folder
+    8. copy users folder
+    9. copy category folder
+    10. copy product folder
+    11. update app-routing
+    12. update app.component.css
+    13. update app.component.html
+    14. update app.component.ts
+    15. update app.module.ts
+    16. ng serve --open
+    17. commit: copy
+
+8. ng build
+    -> create dist directory
+
+
+
+
+
+
+
+
+-----------------------------------------
+validation inputs - user login
+validation inputs - user register
+
+validation inputs - create product
+validation inputs - edit product
+validation inputs - create category
+validation inputs - edit category
+
++ update user details
+
++ progressbar in user login
++ progressbar in user register
++ progressbar in user profile
++ progressbar in edit/add event
++ change hover ui on app component links
+
++ disable back to login
++ disable back to profile
+* snack bar when logout
+
+ui components
+
+login route
++ password confirm
++ differnt new password
++ forgot password
++ password policy update

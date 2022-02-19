@@ -1,0 +1,90 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <h1>{{title}}</h1>
+    <span class="menu-spacer"></span>
+    <div>
+
+      <a mat-button class="margin-left5" routerLinkActive="active" [routerLink]="'/dashboard'"> Dashboard </a>
+
+      <ng-container *ngIf="securityObject.isAuthenticated">
+        <a *hasClaim="['admin', 'supervisor', 'user']" mat-button routerLinkActive="active"
+          [routerLink]="'/hackerEvents'"> HackerEvents </a>
+      </ng-container>
+
+      <ng-container *ngIf="securityObject.isAuthenticated">
+        <a *hasClaim="['admin', 'supervisor', 'user']" mat-button routerLinkActive="active" [routerLink]="'/profile'">
+          Profile </a>
+      </ng-container>
+
+      <!-- *hasClaim="'FullAccessUsers'" -->
+      <ng-container *ngIf="securityObject.isAuthenticated">
+        <a *hasClaim="['admin', 'supervisor']" mat-button routerLinkActive="active" [routerLink]="'/users'"> Users </a>
+      </ng-container>
+
+      <span class="example-spacer"></span>
+      <a *ngIf="!securityObject.isAuthenticated" mat-button routerLinkActive="active" [routerLink]="'/login'"> Login
+      </a>
+      <a *ngIf="securityObject.isAuthenticated" mat-button (click)="logout()"> Logout
+        {{securityObject.firstName}} </a>
+
+    </div>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row *ngIf="securityObject.isAuthenticated">
+    <span *ngIf="securityObject.isAuthenticated" style="font-size: 12px;">{{ securityObject.role | json}}</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+
+      <a mat-list-item routerLinkActive="active" [routerLink]="'/dashboard'"> Dashboard </a>
+
+      <ng-container *ngIf="securityObject.isAuthenticated">
+        <a *hasClaim="['admin', 'supervisor', 'user']" mat-list-item routerLinkActive="active"
+          [routerLink]="'/hackerEvents'"> HackerEvents </a>
+      </ng-container>
+
+      <ng-container *ngIf="securityObject.isAuthenticated">
+        <a *hasClaim="['admin', 'supervisor', 'user']" mat-list-item routerLinkActive="active"
+          [routerLink]="'/profile'"> Profile </a>
+      </ng-container>
+
+      <!-- *ngIf="securityObject.canAccessProducts" -->
+      <ng-container *ngIf="securityObject.isAuthenticated">
+        <a *hasClaim="'AccessProducts'" mat-list-item routerLinkActive="active" [routerLink]="'/products'"> Products
+        </a>
+      </ng-container>
+
+      <!-- *ngIf="securityObject.canAccessCategories" -->
+      <ng-container *ngIf="securityObject.isAuthenticated">
+        <a *hasClaim="'AccessCategories'" mat-list-item outerLinkActive="active" [routerLink]="'/categories'">
+          Categories </a>
+      </ng-container>
+
+      <!-- *hasClaim="'FullAccessUsers'" -->
+      <ng-container *ngIf="securityObject.isAuthenticated">
+        <a *hasClaim="['admin', 'supervisor']" mat-list-item routerLinkActive="active" [routerLink]="'/users'"> Users
+        </a>
+      </ng-container>
+
+      <a *ngIf="!securityObject.isAuthenticated" mat-list-item routerLinkActive="active" [routerLink]="'/login'"> Login
+      </a>
+      <a *ngIf="securityObject.isAuthenticated" mat-list-item (click)="logout()"> Logout </a>
+
+      <!-- <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a> -->
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container">
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

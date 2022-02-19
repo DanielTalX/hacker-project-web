@@ -1,0 +1,37 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h2>Log In</h2>
+      <mat-spinner *ngIf="showSpinner" diameter="30"></mat-spinner>
+      <mat-error *ngIf="loginInvalid || (securityObject && !securityObject.isAuthenticated)">
+        The email and password were not recognized
+      </mat-error>
+      <!-- <mat-form-field class="full-width-input">
+        <input matInput placeholder="username" formControlName="username" required>
+        <mat-error>
+          Please provide a valid username address
+        </mat-error>
+      </mat-form-field> -->
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="email" formControlName="email" required>
+        <mat-error>
+          Please provide a valid email address
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input matInput type="password" placeholder="Password" formControlName="password" required>
+        <mat-error>
+          Please provide a valid password
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button [disabled]="!form.valid || showSpinner" color="primary">Login</button>
+      <!-- Register buttons -->
+      <div class="margin-top">
+        <p>Not a member? <a routerLink="/register">Register</a></p>
+      </div>
+      <div class="margin-top">
+        <p>forgot your password? <a routerLink="/password-reset">password-reset</a></p>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

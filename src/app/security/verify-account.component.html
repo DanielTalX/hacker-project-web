@@ -1,0 +1,53 @@
+<mat-card *ngIf="webUserMessage">
+  <mat-card-content>
+    <p>{{webUserMessage}}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="margin-top">
+  <mat-card-content>
+    <mat-form-field appearance="fill">
+      <mat-label>email</mat-label>
+      <input type="text" matInput disabled [ngModel]="email">
+    </mat-form-field>
+    <div class="margin-top">
+      <p>You did not receive the code? <strong style="cursor: pointer;" (click)="sendNewCode()">Click here</strong> to
+        receive an email with a new verification code.</p>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="emailMessage"class="margin-top">
+  <mat-card-content>
+    <div>
+      <p>emailMessage: {{emailMessage}}</p>
+      <p>requestId: {{requestId}}</p>
+      <p>requestCode: {{requestCode}}</p>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="margin-top">
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h2>Verify Account</h2>
+      <mat-spinner *ngIf="showSpinner" diameter="30"></mat-spinner>
+      <mat-error *ngIf="loginInvalid">
+        The requestId and requestCode were not recognized
+      </mat-error>
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="requestId" formControlName="requestId" required>
+        <mat-error>
+          Please provide a valid requestId
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input matInput type="password" placeholder="requestCode" formControlName="requestCode" required>
+        <mat-error>
+          Please provide a valid requestCode
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button [disabled]="!form.valid || showSpinner" color="primary">Verify</button>
+    </form>
+  </mat-card-content>
+</mat-card>

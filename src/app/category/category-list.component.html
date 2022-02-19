@@ -1,0 +1,62 @@
+<!-- header -->
+<div class="section-header">
+  <h1>Category List</h1>
+  <p class="grey-text pt-3">description</p>
+</div>
+
+<div class="container">
+
+  <div *hasClaim="'AddCategory'" class="col-md-12" style="margin-bottom: 20px;">
+    <button mat-button mat-raised-button color="primary" (click)="addCategory()">Add New Category</button>
+  </div>
+
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+  </mat-form-field>
+
+  <div class="example-container mat-elevation-z8">
+
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z8">
+
+      <!-- categoryId Column -->
+      <ng-container matColumnDef="categoryId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.categoryId}} </td>
+      </ng-container>
+
+      <!-- categoryName Column -->
+      <ng-container matColumnDef="categoryName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category Name </th>
+        <td mat-cell *matCellDef="let element"> {{ element.categoryName }} </td>
+      </ng-container>
+
+      <!-- menu Column -->
+      <ng-container matColumnDef="user-actions">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element; let i = index;">
+
+          <button href="#" [routerLink]="['/categoryDetail', element.categoryId]" mat-mini-fab color="primary"
+            matTooltip="category-edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="disclaimer">
+        <td mat-footer-cell *matFooterCellDef [attr.colspan]="allDisplayedColumns.length">
+          {{countItems + ' items'}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="allDisplayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let element; columns: allDisplayedColumns;" class="example-element-row"></tr>
+      <tr mat-footer-row *matFooterRowDef="['disclaimer']; sticky: true" class="example-second-footer-row"></tr>
+
+    </table>
+
+  </div>
+
+
+</div>
+

@@ -1,0 +1,20 @@
+mat-card {
+    max-width: 600px;
+    margin: 2em auto;
+  }
+  
+mat-form-field {
+    display: block;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+.panel-footer{
+  margin-top: 5px;
+}

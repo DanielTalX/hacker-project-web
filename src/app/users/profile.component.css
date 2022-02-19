@@ -1,0 +1,26 @@
+mat-card {
+    max-width: 600px;
+    margin: 2em auto;
+    text-align: center;
+  }
+  
+mat-form-field {
+    display: block;
+}
+
+mat-spinner{
+  margin: 5px auto;
+}
+
+.align-center{
+  text-align: center;
+}
+
+.margin-top{
+  margin-top: 10px;
+}
+
+.text-left{
+  text-align: left;
+}
+

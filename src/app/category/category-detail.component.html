@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-content>
+    <form #categoryForm="ngForm">
+      <div class="panel panel-primary" *ngIf="category">
+        <div class="panel-heading">
+          <h1 class="panel-title">Category Information</h1>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label for="categoryName">Category Name</label>
+            <input id="categoryName" name="categoryName" #categoryName="ngModel" required class="form-control"
+              [(ngModel)]="category.categoryName" />
+            <div [hidden]="categoryName.valid || categoryName.pristine" class="alert alert-danger">
+              Category Name is required
+            </div>
+          </div>
+
+        </div>
+        <div class="panel-footer">
+          <button class="btn btn-primary" (click)="saveData()" [disabled]="!categoryForm.form.valid"
+            *hasClaim="'AccessCategories'">Save</button>
+          <button class="btn btn-default" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

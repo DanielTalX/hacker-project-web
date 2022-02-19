@@ -1,0 +1,94 @@
+<!-- header -->
+<div class="section-header">
+  <h1>Users List</h1>
+  <p class="grey-text pt-3">description</p>
+</div>
+
+<div class="container">
+
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+  </mat-form-field>
+
+  <div class="example-container mat-elevation-z8">
+
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z8">
+
+      ['firstName', 'lastName', 'email', 'role'];
+      <!-- firstName Column -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> firstName </th>
+        <td mat-cell *matCellDef="let element"> {{ element.firstName }} </td>
+      </ng-container>
+
+      <!-- lastName Column -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> lastName </th>
+        <td mat-cell *matCellDef="let element"> {{ element.lastName }} </td>
+      </ng-container>
+
+      <!-- email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
+        <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+      </ng-container>
+
+      <!-- role Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> role </th>
+        <td mat-cell *matCellDef="let element"> {{ element.role }} </td>
+      </ng-container>
+
+      <!-- menu Column -->
+      <ng-container matColumnDef="user-actions">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element; let i = index;">
+
+          <button href="#" (click)="editUserRole(element)" mat-mini-fab color="primary"
+            matTooltip="user-details">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button class="margin-left5" (click)="deleteUser(element.id)" mat-mini-fab color="warn" aria-label="delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <button mat-icon-button (click)="expandedElement = expandedElement === element ? null : element">
+            <mat-icon> {{ (element == expandedElement) ? ('unfold_less') : ('unfold_more')}}</mat-icon>
+          </button>
+
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="disclaimer">
+        <td mat-footer-cell *matFooterCellDef [attr.colspan]="allDisplayedColumns.length">
+          {{countItems + ' items'}}
+        </td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="allDisplayedColumns.length">
+          <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
+            [style.height]="element == expandedElement ? 'unset' : '0 !important'">
+            <div class="example-element-description">
+              {{element.claims | json}}
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="allDisplayedColumns; sticky: true"></tr>
+      <!-- <tr mat-row *matRowDef="let row; columns: allDisplayedColumns;"></tr> -->
+      <tr mat-row *matRowDef="let element; columns: allDisplayedColumns;" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+      <tr mat-footer-row *matFooterRowDef="['disclaimer']; sticky: true" class="example-second-footer-row"></tr>
+
+    </table>
+
+  </div>
+
+
+</div>
